@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8" />
+	<title>smallfish another blog | {{ page.title }}</title>
+	<link rel="stylesheet" href="/css/master.css" />
+	<script src="/js/master.js"></script>
+	<script type="text/javascript">
+	</script>
+</head>
+
+<body>
+
+	<header>
+		<div class="container">
+			<p id="logo"><a href="/">smallfish another blog</a></p>
+			<nav>
+				<ul class="clearfix">
+					<li{% if page.title == 'About' %} class="selected"{% endif %}><a href="/about.html">关于</a></li>
+					<li{% if page.title == 'Archive' %} class="selected"{% endif %}><a href="/archive.html">归档</a></li>
+				</ul>
+			</nav>
+		</div>
+	</header>
+
+	<section id="content-wrap">
+		<div class="container">
+
+		{{ content }}
+			
+		</div>
+	</section>
+
+	<footer class="container">
+		<p>Copyright &copy; 2010&ndash;{{ site.time | date: "%Y" }} smallfish</p>
+	</div>
+</body>
+</html>
