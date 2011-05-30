@@ -5,7 +5,7 @@ title: 关于
 
 ## 关于 smallfish
 
-{% highlight html %}
+{% highlight python%}
 smallfish
 关注 Debian, Python, Go, PostgreSQL
 邮箱 smallfish.xy AT gmail.com
