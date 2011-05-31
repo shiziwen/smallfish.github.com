@@ -69,7 +69,7 @@ stdout_logfile=/home/smallfish/hello.log
 
 到这里，基本搞定了，下面就是启动管理：
 
-{% highlight shell %}
+{% highlight python %}
 shell> sudo /etc/init.d/supervisor start   -- 启动supervisor服务
 
 shell> sudo supervisorctl status hello     -- 获取hello服务的状态，因为是autorstart，这里已经启动了
