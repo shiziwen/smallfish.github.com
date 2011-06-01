@@ -22,7 +22,7 @@ supervisor地址：[http://supervisord.org](http://supervisord.org)，官方标�
 安装：
 
 {% highlight python %}
-shell> sudo pip install supervisor # easy_install
+shell> sudo aptitude install supervisor # pip/easy_install
 {% endhighlight %}
 
 也可以通过其他包管理来安装，比如apt/yum等。
