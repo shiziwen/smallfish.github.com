@@ -23,11 +23,11 @@ title: home
 {% endfor %}
 
 {% if paginator.previous_page == 1 %}
-  <span id="newer"><a href="/">&laquo;&laquo; 上一页</a></span>
+  <span id="newer"><a href="/">&laquo;&laquo; New Posts</a></span>
 {% elsif paginator.previous_page %}
-  <span id="newer"><a href="/page{{ paginator.previous_page }}">&laquo;&laquo; 上一页</a></span>
+  <span id="newer"><a href="/page{{ paginator.previous_page }}">&laquo;&laquo; New Posts</a></span>
 {% endif %}
 {% if paginator.next_page %}
-  <span id="older"><a href="/page{{ paginator.next_page }}">下一页 &raquo;&raquo;</a></span>
+  <span id="older"><a href="/page{{ paginator.next_page }}">Old Posts &raquo;&raquo;</a></span>
 {% endif %}
 
