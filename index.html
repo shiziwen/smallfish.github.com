@@ -4,7 +4,6 @@ title: home
 ---
 
 {% for post in paginator.posts %}
-
 	{% if forloop.index == 1 %}
 		{% assign class = 'container post' %}
 	{% else %}
@@ -21,5 +20,14 @@ title: home
 			{{ post.content }}
 		</div>
 	</article>
-
 {% endfor %}
+
+{% if paginator.previous_page == 1 %}
+  <span id="newer"><a href="/">&laquo;&laquo; 上一页</a></span>
+{% elsif paginator.previous_page %}
+  <span id="newer"><a href="/page{{ paginator.previous_page }}">&laquo;&laquo; 上一页</a></span>
+{% endif %}
+{% if paginator.next_page %}
+  <span id="older"><a href="/page{{ paginator.next_page }}">下一页 &raquo;&raquo;</a></span>
+{% endif %}
+
