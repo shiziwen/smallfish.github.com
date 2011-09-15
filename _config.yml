@@ -1,3 +1,19 @@
-pygments: true
-markdown: rdiscount
+title: "smallfish blog"
+url: "http://127.0.0.1:4000"
+author: "smallfish"
+email: "smallfish@gmail.com"
+description: "smallfish blog"
+
+auto: false
+source: .
 paginate: 10
+paginate_files:
+ - index.html
+
+
+markdown: rdiscount
+pygments: true
+
+exclude:
+  - README.markdown
+  - _drafts
