@@ -4,7 +4,7 @@ layout: post
 title: auto-xhprof PHP自动性能测试工具
 ---
 
-auto-xhprof: [https://github.com/smallfish/auto-xhprof](https://github.com/smallfish/auto-xhprof)
+auto-xhprof 项目地址： [https://github.com/smallfish/auto-xhprof](https://github.com/smallfish/auto-xhprof)
 
 最近需要对一些PHP应用和底层函数进行一些排错和性能方面的分析，不由得想起xhprof这个小强的利器。
 
