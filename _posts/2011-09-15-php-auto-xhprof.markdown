@@ -33,6 +33,7 @@ auto_prepend_file = '/path/prepend.php'
 * 数据内容含：请求的URL、相应时间。
 * 支持gearman异步保存数据。
 * 提供封装的xhprof_start/xhprof_end对部分程序进行手动分析。
+* 自动记录错误信息
 
 图一（列表显示）：
 ![](/images/auto-xhprof-1.png)
