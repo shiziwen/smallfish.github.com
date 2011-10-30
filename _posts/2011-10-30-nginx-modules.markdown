@@ -28,6 +28,7 @@ title: Nginx 第三方模块试用记
 
 这里编译和drizzle和lua模块，在编译Nginx之前需要设置一下这两个库的LIB和INCLUDE文件地址：
 
+{% highlight bash %}
     -- lua --
     export LUA_LIB=/path/to/lua/lib
     export LUA_INC=/path/to/lua/include
@@ -35,9 +36,11 @@ title: Nginx 第三方模块试用记
     -- drizzle --
     export LIBDRIZZLE_INC=/opt/drizzle/include/libdrizzle-1.0
     export LIBDRIZZLE_LIB=/opt/drizzle/lib
+{% endhighlight %}
 
 Nginx编译选项如下，请注意先后顺序：
 
+{% highlight bash %}
     ./configure --prefix=/opt/nginx \
         --with-pcre=../pcre \
         --add-module=../ngx_devel_kit \
@@ -48,13 +51,16 @@ Nginx编译选项如下，请注意先后顺序：
         --add-module=../srcache-nginx-module \
         --add-module=../drizzle-nginx-module \
         --add-module=../rds-json-nginx-module
+{% endhighlight %}
 
 重新启动/加载Nginx命令一般是：
 
+{% highlight bash %}
     kill -HUP `cat /path/nginx/logs/nginx.pid`
 
     -- or --
     /path/nginx/sbin/nginx -s reload
+{% endhighlight %}
 
 PS：详细的模块编译可以参考各自模块的文档说明。
 
@@ -64,6 +70,7 @@ PS：详细的模块编译可以参考各自模块的文档说明。
 
 程序里helloworld很简单，nginx的hello如何实现呢？
 
+{% highlight bash %}
     1. 最简单的helloworld
     location /hello1 {
         echo "hello 1111!";
@@ -84,11 +91,13 @@ PS：详细的模块编译可以参考各自模块的文档说明。
 
     是不是很帅气有趣。例2中的subrequest是完全non-blocking的。
     echo模块还有timer扩展，页面输出加载时间也是小case了。
+{% endhighlight %}
 
 **场景2：Memcached HTTP 接口**
 
 想当年哥为了兼容不同语言的api，自己封装了memcached操作，真是挺苦逼的，当时还非常羡慕tokyotyrant的http接口来着，现在用memc模块效果一样，还有upstream和keepalive功能哦~
 
+{% highlight bash %}
     location /memcached {
         set $memc_cmd $arg_cmd;
         set $memc_key $arg_key;
@@ -100,11 +109,13 @@ PS：详细的模块编译可以参考各自模块的文档说明。
     URL访问类似 http://host:port/memcached?cmd=aaa&key=bbb&val=ccc
 
     还需要自己封装么？完全的基于url编程了，不再考虑各自语言的memcached api，cluster也简化了。
+{% endhighlight %}
 
 **场景3：数据库查询**
 
 这里用了libdrizzle模块，兼容MySQL、Drizzle、SQLite数据库。有时候为了一些查询或者接口，还需要用语言来封装一些数据库查询操作，现在直接通过drizzle模块可以很轻松的做到~~
 
+{% highlight bash %}
     # 添加MySQL配置
     upstream mysql {
         drizzle_server 127.0.0.1:3306 dbname=test user=smallfish password=123 protocol=mysql;
@@ -124,12 +135,13 @@ PS：详细的模块编译可以参考各自模块的文档说明。
     location /mysql-status {
         drizzle_status;
     }
+{% endhighlight %}
 
 **场景4：lua扩展**
 
 内嵌lua语言，超级牛力哦~~~想干啥都可以了，而且还可以充分发挥lua coroutine的风骚，淘宝量子统计完全是lua扩展。
 
-
+{% highlight bash %}
     location /lua1 {
         default_type 'text/plain';
         content_by_lua 'ngx.say("hello, lua")';
@@ -144,6 +156,7 @@ PS：详细的模块编译可以参考各自模块的文档说明。
     }
 
     Lua支持的选项很多，具体可参考官网WIKI文档。
+{% endhighlight %}
 
 嗯，这里尝试玩了几个模块，详细的例子可以参考各自的模块文档，里面都有详细的说明和选项配置。
 
