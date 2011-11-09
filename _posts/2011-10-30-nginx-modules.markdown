@@ -56,10 +56,8 @@ Nginx编译选项如下，请注意先后顺序：
 重新启动/加载Nginx命令一般是：
 
 {% highlight bash %}
-    kill -HUP `cat /path/nginx/logs/nginx.pid`
-
-    -- or --
-    /path/nginx/sbin/nginx -s reload
+    1. kill -HUP `cat /path/nginx/logs/nginx.pid`
+    2. /path/nginx/sbin/nginx -s reload
 {% endhighlight %}
 
 PS：详细的模块编译可以参考各自模块的文档说明。
