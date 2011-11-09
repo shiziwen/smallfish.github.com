@@ -18,7 +18,7 @@ title: Nginx Session 模块
     --add-module=../encrypted-session-nginx-module
 {% endhighlight %}
 
-Nginx重新reload就可以了：
+重新编译Nginx二进制，Nginx需要quit再启动。而普通配置更新则reload即可：
 
 {% highlight bash %}
 1. kill -HUP `cat /path/nginx/logs/nginx.pid`

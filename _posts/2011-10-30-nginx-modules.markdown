@@ -53,7 +53,7 @@ Nginx编译选项如下，请注意先后顺序：
     --add-module=../rds-json-nginx-module
 {% endhighlight %}
 
-重新启动/加载Nginx命令一般是：
+重新编译Nginx二进制，Nginx需要quit再启动。而普通配置更新则reload即可：
 
 {% highlight bash %}
 1. kill -HUP `cat /path/nginx/logs/nginx.pid`
