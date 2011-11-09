@@ -5,14 +5,16 @@ title: Nginx Session 模块
 ---
 上一篇[《Nginx第三方模块》](http://chenxiaoyu.org/2011/10/30/nginx-modules.html)涉及了数据库、Memcached以及Lua的扩展，但是相对于Web开发是不是还缺点什么呢？答案是回话（Session）模块。
 
-这里还是需要感谢一下[@agentzh](http://weibo.com/agentzh)，已经封装好了encrypted-session模块。地址如下：
+这里还是需要感谢一下[@agentzh](http://weibo.com/agentzh)，已经封装好了encrypted-session模块。模块依赖ngx_devel_kit包。模块地址如下：
 
+* [ngx_devel_kit](https://github.com/simpl/ngx_devel_kit)
 * [encrypted-session-nginx-module](https://github.com/agentzh/encrypted-session-nginx-module)
 
 编译很简单，类似如下：
 
 {% highlight bash %}
 ./configure --prefix=/opt/nginx \
+    --add-module=../ngx_devel_kit \
     --add-module=../encrypted-session-nginx-module
 {% endhighlight %}
 
