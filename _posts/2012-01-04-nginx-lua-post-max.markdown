@@ -4,6 +4,8 @@ layout: post
 title: Nginx-Lua过滤POST请求
 ---
 
+注：此文章会持续更新
+
 2012 来的几天关于Hash攻击的文章不断，基本语言级别的都收到影响。
 
 看了下 PHP 相关 patch，基本就是对 POST 的 key 数量做一个限制，其他提供的 patch 差不多也是如此。
@@ -53,7 +55,6 @@ end
 {% highlight bash %}
 
 location /test {
-    lua_need_request_body on;
     rewrite_by_lua_file 'conf/post-limit.lua';
     root html;
 }
@@ -76,6 +77,5 @@ $ curl --data "a=1&a=11&b=2&c=1" http://localhost/test/1.html
 
 感谢 [@agentzh](http://weibo.com/agentzh) 建议，需要注意一下，在 Nginx 配置中 client_max_body_size 和 client_body_buffer_size 需要设为相同大小。
 
-此文章会持续更新。
 
 __END__
