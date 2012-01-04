@@ -26,23 +26,27 @@ conf/post-limit.lua 文件内容：
 
 {% highlight bash %}
 
-ngx.req.read_body() -- 读取 body 部分
+ngx.req.read_body()                           -- 读取 body
 
-local method = ngx.var.request_method -- 只过滤 POST
+local method = ngx.var.request_method
 
-if method == 'POST' then
-    local args      = ngx.req.get_post_args() -- 获取 POST table
-    local count     = 0
-    local max_count = 2                       -- 常量，超过多少返回错误
-    for key, val in pairs(args) do
-        count = count + 1
-    end
-    if count > max_count then
-        ngx.redirect('/post-max-error')  -- 错误页面
+if method == 'POST' then                      -- 只过滤 POST 请求
+    local data  = ngx.req.get_body_data()
+    local count = 0
+    local ch    = string.byte('&')            -- 计算 & 次数
+    for i=1, #data do
+        if string.byte(data, i) == ch then
+            count = count + 1
+        end
+        if count > 2 then                     -- 大于2次，转向错误页面
+            ngx.redirect('/post-max_count')
+        end
     end
 end
 
 {% endhighlight %}
+
+原先 ngx.req.get_post_args 函数来判断，发现也收到 hash 的影响，最后采取原始的循环字符串版本。
 
 完整 nginx 配置片段：
 
@@ -69,5 +73,9 @@ $ curl --data "a=1&a=11&b=2&c=1" http://localhost/test/1.html
 {% endhighlight %}
 
 想起之前用 ModPerl 重写了 Apache 的 TransHandler/AccessHandler，跟这个比较类似，加一些过滤器。
+
+感谢 [@agentzh](http://weibo.com/agentzh) 建议，需要注意一下，在 Nginx 配置中 client_max_body_size 和 client_body_buffer_size 需要设为相同大小。
+
+此文章会持续更新。
 
 __END__
