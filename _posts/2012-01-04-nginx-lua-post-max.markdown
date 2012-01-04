@@ -14,23 +14,23 @@ title: Nginx-Lua过滤POST请求
 
 这里大概有几个步骤：
 
-1. 打开 lua_need_request_body 选项，默认是关闭 off。
+打开 lua_need_request_body 选项，默认是关闭 off。
 
 {% highlight bash %}
 
-    lua_need_request_body on;
+lua_need_request_body on;
 
 {% endhighlight %}
 
-2. 加载 conf/post-limit.lua
+加载 conf/post-limit.lua
 
 {% highlight bash %}
 
-    rewrite_by_lua_file 'conf/post-limit.lua';
+rewrite_by_lua_file 'conf/post-limit.lua';
 
 {% endhighlight %}
 
-3. conf/post-limit.lua 文件内容：
+conf/post-limit.lua 文件内容：
 
 {% highlight bash %}
 
@@ -52,15 +52,15 @@ end
 
 {% endhighlight %}
 
-4. 完整 nginx 配置片段：
+完整 nginx 配置片段：
 
 {% highlight bash %}
 
-    location /test {
-        lua_need_request_body on;
-        rewrite_by_lua_file 'conf/post-limit.lua';
-        root html;
-    }
+location /test {
+    lua_need_request_body on;
+    rewrite_by_lua_file 'conf/post-limit.lua';
+    root html;
+}
 
 {% endhighlight %}
 
@@ -68,11 +68,11 @@ reload nginx 即可。可以这样来访问测试：
 
 {% highlight bash %}
 
-    $ curl --data "a=1&a=11&b=2" http://localhost/test/1.html
-    返回 405，可以正常 GET 页面内容。
+$ curl --data "a=1&a=11&b=2" http://localhost/test/1.html
+返回 405，可以正常 GET 页面内容。
 
-    $ curl --data "a=1&a=11&b=2&c=1" http://localhost/test/1.html
-    返回 302，重定向到 /post-max-error 错误。
+$ curl --data "a=1&a=11&b=2&c=1" http://localhost/test/1.html
+返回 302，重定向到 /post-max-error 错误。
 
 {% endhighlight %}
 
