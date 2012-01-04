@@ -31,21 +31,23 @@ conf/post-limit.lua 文件内容：
 ngx.req.read_body()
 
 local method   = ngx.var.request_method
-local max_size = 2                            -- 参数最多个数，这里测试用，2个
+local max_size = 2                               -- 参数最多个数，这里测试用，2个
 
-if method == 'POST' then                      -- 只过滤 POST 请求
-    local data  = ngx.req.get_body_data()
+if method == 'POST' then                         -- 只过滤 POST 请求
+    local data = ngx.req.get_body_data()
     if data then
         local count = 0
         local i     = 0
         while true do
-            if count > max_size then            -- 大于2次，重定向错误页面
-                ngx.redirect('/post-max_count')
+            if count > max_size then             -- 大于2次，重定向错误页面
+                ngx.redirect('/post-max-count')
             end
-            i = string.find(data, '&', i+1)     -- 查找 & 字符
+            i = string.find(data, '&', i+1)      -- 查找 & 字符
             if i == nil then break end
             count = count + 1
         end
+    else
+        ngx.redirect('/post-error')
     end
 end
 
