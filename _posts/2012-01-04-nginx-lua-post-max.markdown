@@ -14,15 +14,7 @@ title: Nginx-Lua过滤POST请求
 
 这里大概有几个步骤：
 
-打开 lua_need_request_body 选项，默认是关闭 off。
-
-{% highlight bash %}
-
-lua_need_request_body on;
-
-{% endhighlight %}
-
-加载 conf/post-limit.lua
+加载 conf/post-limit.lua，文件内容在下一段
 
 {% highlight bash %}
 
