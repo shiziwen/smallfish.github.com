@@ -83,10 +83,8 @@ mac:~ smallfish$ sudo /opt/nginx/sbin/nginx
 
 前几篇链接分别如下：
 
-[http://chenxiaoyu.org/blog/archives/294](http://chenxiaoyu.org/blog/archives/294)
-[http://chenxiaoyu.org/blog/archives/306](http://chenxiaoyu.org/blog/archives/306)
-[http://chenxiaoyu.org/blog/archives/312](http://chenxiaoyu.org/blog/archives/312)
-[http://chenxiaoyu.org/blog/archives/327](http://chenxiaoyu.org/blog/archives/327)
-
-&nbsp;
+[Pylons 入门实例教程 - Hell ](http://chenxiaoyu.org/2010/06/28/pylons-tutorial-hello.html)
+[Pylons 入门实例教程 – 表单和文件上传](http://chenxiaoyu.org/2010/06/30/pylons-tutorial-form-upload-file.html)
+[Pylons 入门实例教程 – 数据库操作](http://chenxiaoyu.org/2010/07/01/pylons-tutorial-database.html)
+[Pylons 入门实例教程 – cookie 和 session](http://chenxiaoyu.org/2010/07/03/pylons-tutorial-cookie-session.html)
 

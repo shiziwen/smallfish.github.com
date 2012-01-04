@@ -3,7 +3,7 @@ layout: post
 title: Pylons 入门实例教程 – 表单和文件上传
 ---
 
-继续上一篇《[http://chenxiaoyu.org/blog/archives/294](http://chenxiaoyu.org/blog/archives/294)》，现在开始讲在 Pylons 里如何提交表单和上传文件。
+继续上一篇《[http://chenxiaoyu.org/2010/06/28/pylons-tutorial-hello.html](http://chenxiaoyu.org/2010/06/28/pylons-tutorial-hello.html)》，现在开始讲在 Pylons 里如何提交表单和上传文件。
 
 继续延用上篇里面的 hello 工程，在 HiController 里添加 form 方法：
 

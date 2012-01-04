@@ -5,7 +5,7 @@ title: Pylons 入门实例教程 – cookie 和 session
 
 本篇讲述在 Pylons 里使用 cookie 和 session。
 
-示例还是在上篇《[http://chenxiaoyu.org/blog/archives/312](http://chenxiaoyu.org/blog/archives/312)》的代码里继续添加。先来尝试下  cookie，添加新的 cookietest controller。
+示例还是在上篇《[http://chenxiaoyu.org/2010/07/01/pylons-tutorial-database.html](http://chenxiaoyu.org/2010/07/01/pylons-tutorial-database.html)》的代码里继续添加。先来尝试下  cookie，添加新的 cookietest controller。
 
 修改 index 方法，添加显示部分：
 
