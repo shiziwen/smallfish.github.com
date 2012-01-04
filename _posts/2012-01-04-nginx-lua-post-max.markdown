@@ -20,7 +20,7 @@ title: Nginx-Lua过滤POST请求
 
 {% highlight bash %}
 
-rewrite_by_lua_file 'conf/post-limit.lua';
+access_by_lua_file 'conf/post-limit.lua';
 
 {% endhighlight %}
 
@@ -60,7 +60,7 @@ end
 {% highlight bash %}
 
 location /test {
-    rewrite_by_lua_file 'conf/post-limit.lua';
+    access_by_lua_file 'conf/post-limit.lua';
     root html;
 }
 
