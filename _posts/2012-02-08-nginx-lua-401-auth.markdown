@@ -54,7 +54,7 @@ location / {
 
 测试过程中刚好发现 [ngx_coolkit](https://github.com/FRiCKLE/ngx_coolkit) 模块在处理 $remote_passwd 一个 bug，此变量在 lua 中不能直接用 ngx.var.remote_passwd 读取，原因是 remote_passwd 变量在模块设置的标志位 NGX_HTTP_VAR_NOHASH，[@agentzh](http://weibo.com/agentzh) 已经在最新的 ngx_coolkit 中修复。
 
-完整说明参考：[http://weibo.com/1834459124/y4xzWzV2e](http://weibo.com/1834459124/y4xzWzV2e)
+NGX_HTTP_VAR_NOHASH 完整说明参考微博：[http://weibo.com/1834459124/y4xzWzV2e](http://weibo.com/1834459124/y4xzWzV2e)
 
 老版本的 ngx_coolkit 可以通过这样来绕过：
 
