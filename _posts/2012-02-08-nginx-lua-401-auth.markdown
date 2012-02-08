@@ -7,8 +7,7 @@ title: Nginx-Lua HTTP 401 认证校验
 本文示例依赖模块：
 
 * [lua-nginx-module](https://github.com/chaoslawful/lua-nginx-module/tags)
-* [ngx_http_auth_request_module](https://github.com/PiotrSikora/ngx_http_auth_request_module) (用于处理 auth 请求)
-* [ngx_coolkit](https://github.com/FRiCKLE/ngx_coolkit) (获取$ remote_passwd 输入值)
+* [ngx_coolkit](https://github.com/FRiCKLE/ngx_coolkit)（获取$ remote_passwd 输入值）
 
 如何编译Nginx这些扩展模块，请参考以前[《Nginx 第三方模块试用记》](http://chenxiaoyu.org/2011/10/30/nginx-modules.html)。
 
@@ -30,6 +29,8 @@ title: Nginx-Lua HTTP 401 认证校验
 这里 Apache 的认证是基于加密文件的认证，有点局限性。比如用户密码是存储在数据库中，这样的校验有点局限，当然可以通过扩展 C Apache 模块来解决（应该有类似的模块）。
 
 本文尝试用 Nginx 来扩展一下 HTTP 401 认证，验证部分是由 lua-nginx-module 代码完成。
+
+![](/images/nginx-lua-401-auth.png)
 
 nginx.conf 配置片段：
 
