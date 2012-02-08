@@ -15,7 +15,7 @@ title: Nginx-Lua HTTP 401 认证校验
 
 比如 PHP [401发送示例](http://php.net/manual/zh/features.http-auth.php)，或者 Apache 配置：
 
-{% highlight bash %}
+{% highlight html%}
 
 <Directory "/path/a">
   AuthType Basic
@@ -36,7 +36,7 @@ nginx.conf 配置片段：
 
 {% highlight bash %}
 
-location / {
+location /ubuntu {
     access_by_lua '
         -- 用户和密码正确 access 则通过，并转向 proxy 部分。
         if ngx.var.remote_user == "smallfish" and ngx.var.remote_passwd == "12" then
