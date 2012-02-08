@@ -7,7 +7,7 @@ title: Nginx-Lua HTTP 401 认证校验
 本文示例依赖模块：
 
 * [lua-nginx-module](https://github.com/chaoslawful/lua-nginx-module/tags)
-* [ngx_coolkit](https://github.com/FRiCKLE/ngx_coolkit)（获取$ remote_passwd 输入值）
+* [ngx_coolkit](https://github.com/FRiCKLE/ngx_coolkit)（获取$remote_passwd 输入值）
 
 如何编译Nginx这些扩展模块，请参考以前[《Nginx 第三方模块试用记》](http://chenxiaoyu.org/2011/10/30/nginx-modules.html)。
 
