@@ -49,7 +49,7 @@ OK，到这里基本服务端已经配置完毕，Nginx 只需要 reload 一下�
 
 查看是否开启gzip，需要客户端加入："Accept-Encoding: gzip, deflate" 头信息。
 
-$ curl -I -H "Accept-Encoding: gzip, deflate" "http://localhost/wp-content/themes/twentyten/tag.php"
+$ curl -I -H "Accept-Encoding: gzip, deflate" "http://localhost/tag.php"
 
 HTTP/1.1 200 OK
 Server: nginx
@@ -58,7 +58,7 @@ Content-Type: text/html
 Connection: close
 Content-Encoding: gzip
 
-$ curl -I -H "Accept-Encoding: gzip, deflate" "http://localhost/wp-content/themes/twentyten/style.css"
+$ curl -I -H "Accept-Encoding: gzip, deflate" "http://localhost/style.css"
 
 HTTP/1.1 200 OK
 Server: nginx
