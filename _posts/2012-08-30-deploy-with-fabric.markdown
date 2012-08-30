@@ -13,7 +13,6 @@ Fabric 是基于 SSH 协议的 Python 工具，相比传统的 ssh/scp 方式，
 {% highlight bash %}
 
     $ ssh x.x.x.x 'uname -a' -- 输出略
-    
 {% endhighlight %}
 Fabric 示例：
 
@@ -24,7 +23,6 @@ Fabric 示例：
     def uname():
         run('uname -a')
     $ fab -H x.x.x.x uname -- 输出略
-
 {% endhighlight %}
 
 肉眼直观看上去，貌似比 ssh 方式要写不少代码，但是基于 ssh 方式中间可控环节比较少，例如：你想判断某服务是否已经启动，没有启动则执行启动等等操作。ssh 命令式的做法稍显麻烦。（当然龌龊一点可以在被操作机器上写好一个脚本，ssh 调用这个脚本）
@@ -54,7 +52,6 @@ Fabric 示例：
     fab -w             -- warn_only，默认是碰到异常直接abort退出
     fab -f             -- 指定入口文件，fab默认入口文件是：fabfile/fabfile.py
     更多请参考：fab --help
-
 {% endhighlight %}
 
 常用的函数：
@@ -66,7 +63,6 @@ Fabric 示例：
     cd('/tmp')                       -- 切换远程目录
     run('uname -a')                  -- 执行远程命令
     sudo('/etc/init.d/nginx start')  -- 执行远程sudo，注意pty选项
-
 {% endhighlight %}
 
 示例1：管理远程 nginx 服务
@@ -92,7 +88,6 @@ Fabric 示例：
         nginx_stop   nginx stop
     
     $ fab -H x.x.x.x nginx_start  -- 启动 nginx
-
 {% endhighlight %}
 
 示例2：基于角色
@@ -116,7 +111,6 @@ Fabric 示例：
     
     $ fab -R nginx nginx_start  -- 启动 nginx
     $ fab -R mysql mysql_start  -- 启动 mysql
-
 {% endhighlight %}
 
 示例3：混合本地和远程操作
@@ -132,7 +126,6 @@ Fabric 示例：
             put('xxx.tar.gz', '/tmp') # 上传压缩包到远程 /tmp 目录下
         with cd('/tmp'):   # 切换到远程 /tmp 目录
             run('tar zxf xxx.tar.gz') # 远程解压
-
 {% endhighlight %}
 
 是不是看上去都是像本地一样？对吧。
