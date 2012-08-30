@@ -1,7 +1,7 @@
 
 ---
 layout: post
-title: Fabric部署工具
+title: Fabric 部署工具
 ---
 
 Fabric 是基于 SSH 协议的 Python 工具，相比传统的 ssh/scp 方式，用 Python 的语法写管理命令更易读也更容易扩展，管理单台或者多台机器犹如本地操作一般。
@@ -10,15 +10,22 @@ Fabric 是基于 SSH 协议的 Python 工具，相比传统的 ssh/scp 方式，
 
 传统维护方法：
 
+{% highlight bash %}
+
     $ ssh x.x.x.x 'uname -a' -- 输出略
     
+{% endhighlight %}
 Fabric 示例：
+
+{% highlight bash %}
 
     $ cat fabfile.py
     from fabric.api import run
     def uname():
         run('uname -a')
     $ fab -H x.x.x.x uname -- 输出略
+
+{% endhighlight %}
 
 肉眼直观看上去，貌似比 ssh 方式要写不少代码，但是基于 ssh 方式中间可控环节比较少，例如：你想判断某服务是否已经启动，没有启动则执行启动等等操作。ssh 命令式的做法稍显麻烦。（当然龌龊一点可以在被操作机器上写好一个脚本，ssh 调用这个脚本）
 
