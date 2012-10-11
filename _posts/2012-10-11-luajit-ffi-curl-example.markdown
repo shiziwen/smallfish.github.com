@@ -14,7 +14,6 @@ title: LuaJIT FFI 调用 Curl 示例
     操作系统：   Mac OS X 10.8.2
     LuaJIT版本：LuaJIT-2.0.0-beta10
     Curl版本：  7.24.0
-    
 {% endhighlight %}
 
 测试代码如下：
@@ -44,7 +43,6 @@ title: LuaJIT FFI 调用 Curl 示例
         end
         libcurl.curl_easy_cleanup(curl)
     end
-
 {% endhighlight %}
 
 
@@ -54,7 +52,6 @@ title: LuaJIT FFI 调用 Curl 示例
 {% highlight bash %}
 
     URL using bad/illegal format or missing URL
-
 {% endhighlight %}
 
 __END__
