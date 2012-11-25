@@ -96,7 +96,7 @@ title: lua-resty-beanstalkd 模块教程
 
 {% endhighlight %}
 
-为了提升性能，可以考虑 set_keepalive（提升50%以上性能），需要注意：
+为了提升性能，可以调用 set_keepalive（提升50%以上性能），需要注意：
 
 1. 代码中不要调用 xx:close 主动关闭连接。
 2. 在对象使用后调用 xx:set_keepalive，而不是初始化 new/connect 时候调用此方法。
