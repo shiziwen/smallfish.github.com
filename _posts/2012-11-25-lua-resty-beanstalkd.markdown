@@ -8,11 +8,11 @@ title: lua-resty-beanstalkd 模块教程
 
 * ngx_lua [http://wiki.nginx.org/HttpLuaModule](http://wiki.nginx.org/HttpLuaModule)
     
-     Embed the power of Lua into Nginx
+     Embed the power of Lua into Nginx 摘自官方描述
          
 * beanstalkd [http://kr.github.com/beanstalkd/](http://kr.github.com/beanstalkd/)
 
-    一个轻量级的队列系统，实现了生产者消费者模型。协议类似 memcached，相当简单易用。
+    一个轻量级的队列系统，实现了生产者消费者模型。协议类似 Memcached，相当简单易用。
 
 * lua-resty-beanstalkd [https://github.com/smallfish/lua-resty-beanstalkd](https://github.com/smallfish/lua-resty-beanstalkd)
 
