@@ -58,6 +58,8 @@ title: lua-resty-beanstalkd 模块教程
 
 2. 消费者（消费消息），主要用了三个协议：watch/reserve/delete，代码如下：
 
+{% highlight bash %}
+
         location /t {
             content_by_lua '
                 local beanstalkd = require "resty.beanstalkd"
