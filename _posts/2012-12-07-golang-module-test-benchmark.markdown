@@ -59,6 +59,10 @@ ok      _/Users/smallfish/test/go/foo   0.013s
 
 {% highlight bash %}
 func BenchmarkAdd(b *testing.B) {
+    // 如果需要初始化，比较耗时的操作可以这样：
+    // b.StopTimer()
+    // .... 一堆操作
+    // b.StartTimer()
     for i := 0; i < b.N; i++ {
         Add(1, 2)
     }
