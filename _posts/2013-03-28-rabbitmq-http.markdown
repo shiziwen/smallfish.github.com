@@ -49,8 +49,8 @@ title: RabbitMQ REST API 教程
 
 {% highlight bash %}
 
-        $ curl -i -X POST http://127.0.0.1:8080/exchange -d \
-        '{"name": "e1", "type": "topic", "durable": true, "autodelete": false}'
+$ curl -i -X POST http://127.0.0.1:8080/exchange -d \
+'{"name": "e1", "type": "topic", "durable": true, "autodelete": false}'
 
 {% endhighlight %}
     
@@ -58,8 +58,8 @@ title: RabbitMQ REST API 教程
 
 {% highlight bash %}
 
-        $ curl -i -X POST http://127.0.0.1:8080/queue -d \
-        '{"name": "q1"}'
+$ curl -i -X POST http://127.0.0.1:8080/queue -d \
+'{"name": "q1"}'
 
 {% endhighlight %}
 
@@ -67,8 +67,8 @@ title: RabbitMQ REST API 教程
 
 {% highlight bash %}
 
-        $ curl -i -X POST http://127.0.0.1:8080/queue/bind -d \
-        '{"queue": "q1", "exchange": "e1", "keys": ["aa", "bb", "cc"]}'
+$ curl -i -X POST http://127.0.0.1:8080/queue/bind -d \
+'{"queue": "q1", "exchange": "e1", "keys": ["aa", "bb", "cc"]}'
 
 {% endhighlight %}
 
@@ -76,8 +76,8 @@ title: RabbitMQ REST API 教程
 
 {% highlight bash %}
 
-        $ curl -i -X POST "http://127.0.0.1:8080/publish" -d \
-        '{"exchange": "e1", "key": "bb", "body": "hahaha"}'
+$ curl -i -X POST "http://127.0.0.1:8080/publish" -d \
+'{"exchange": "e1", "key": "bb", "body": "hahaha"}'
 
 {% endhighlight %}
 
@@ -85,10 +85,10 @@ title: RabbitMQ REST API 教程
 
 {% highlight bash %}
 
-        $ curl -i "http://127.0.0.1:8080/queue?name=q1"
+$ curl -i "http://127.0.0.1:8080/queue?name=q1"
         
-        PS：消费的接口输出为 Chunked 模式，可以用类似文件的行读取方式，接口是 HTTP 长连接。
-        同时这个接口也支持多个 Queue 一起消费，类似：“/queue?name=q1&name=q2” 即可。
+PS：消费的接口输出为 Chunked 模式，可以用类似文件的行读取方式，接口是 HTTP 长连接。
+同时这个接口也支持多个 Queue 一起消费，类似：“/queue?name=q1&name=q2” 即可。
 
 {% endhighlight %}
 
