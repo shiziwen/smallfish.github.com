@@ -11,17 +11,19 @@ Fabric 是基于 SSH 协议的 Python 工具，相比传统的 ssh/scp 方式，
 
 {% highlight bash %}
 
-    $ ssh x.x.x.x 'uname -a' -- 输出略
+$ ssh x.x.x.x 'uname -a' -- 输出略
+
 {% endhighlight %}
 Fabric 示例：
 
 {% highlight bash %}
 
-    $ cat fabfile.py
-    from fabric.api import run
-    def uname():
-        run('uname -a')
-    $ fab -H x.x.x.x uname -- 输出略
+$ cat fabfile.py
+from fabric.api import run
+def uname():
+    run('uname -a')
+$ fab -H x.x.x.x uname -- 输出略
+
 {% endhighlight %}
 
 肉眼直观看上去，貌似比 ssh 方式要写不少代码，但是基于 ssh 方式中间可控环节比较少，例如：你想判断某服务是否已经启动，没有启动则执行启动等等操作。ssh 命令式的做法稍显麻烦。（当然龌龊一点可以在被操作机器上写好一个脚本，ssh 调用这个脚本）
@@ -40,91 +42,96 @@ Fabric 示例：
 
 {% highlight bash %}
 
-    env.host           -- 主机ip，当然也可以-H参数指定
-    env.password       -- 密码，打好通道的请无视
-    env.roledefs       -- 角色分组，比如：{'web': ['x', 'y'], 'db': ['z']}
-    
-    fab -l             -- 显示可用的task（命令）
-    fab -H             -- 指定host，支持多host逗号分开
-    fab -R             -- 指定role，支持多个
-    fab -P             -- 并发数，默认是串行
-    fab -w             -- warn_only，默认是碰到异常直接abort退出
-    fab -f             -- 指定入口文件，fab默认入口文件是：fabfile/fabfile.py
-    更多请参考：fab --help
+env.host           -- 主机ip，当然也可以-H参数指定
+env.password       -- 密码，打好通道的请无视
+env.roledefs       -- 角色分组，比如：{'web': ['x', 'y'], 'db': ['z']}
+
+fab -l             -- 显示可用的task（命令）
+fab -H             -- 指定host，支持多host逗号分开
+fab -R             -- 指定role，支持多个
+fab -P             -- 并发数，默认是串行
+fab -w             -- warn_only，默认是碰到异常直接abort退出
+fab -f             -- 指定入口文件，fab默认入口文件是：fabfile/fabfile.py
+更多请参考：fab --help
+
 {% endhighlight %}
 
 常用的函数：
 
 {% highlight bash %}
 
-    local('pwd')                     -- 执行本地命令
-    lcd('/tmp')                      -- 切换本地目录
-    cd('/tmp')                       -- 切换远程目录
-    run('uname -a')                  -- 执行远程命令
-    sudo('/etc/init.d/nginx start')  -- 执行远程sudo，注意pty选项
+local('pwd')                     -- 执行本地命令
+lcd('/tmp')                      -- 切换本地目录
+cd('/tmp')                       -- 切换远程目录
+run('uname -a')                  -- 执行远程命令
+sudo('/etc/init.d/nginx start')  -- 执行远程sudo，注意pty选项
+
 {% endhighlight %}
 
 示例1：管理远程 nginx 服务
 
 {% highlight bash %}
 
-    $ cat fabfile.py
-    from fabric.api import *
-    @task
-    def nginx_start():
-        ''' nginx start '''
-    sudo('/etc/init.d/nginx start')
+$ cat fabfile.py
+from fabric.api import *
+@task
+def nginx_start():
+    ''' nginx start '''
+sudo('/etc/init.d/nginx start')
 
-    @task
-    def nginx_stop():
-        ''' nginx stop '''
-        sudo('/etc/init.d/nginx stop')
-        
-    $ fab --list      -- 查看可用命令
-    Available commands:
-
-        nginx_start  nginx start 
-        nginx_stop   nginx stop
+@task
+def nginx_stop():
+    ''' nginx stop '''
+    sudo('/etc/init.d/nginx stop')
     
-    $ fab -H x.x.x.x nginx_start  -- 启动 nginx
+$ fab --list      -- 查看可用命令
+Available commands:
+
+    nginx_start  nginx start 
+    nginx_stop   nginx stop
+
+$ fab -H x.x.x.x nginx_start  -- 启动 nginx
+
 {% endhighlight %}
 
 示例2：基于角色
 
 {% highlight bash %}
 
-    $ cat fabfile.py
-    from fabric.api import *
-    env.roledefs = {'nginx': ['x.x.x.x', 'y.y.y.y'], 'mysql': 'z.z.z.z'}
-    @task
-    def mysql_start()
-        ''' mysql start '''
-        sudo('/etc/init.d/mysql start')
-        
-    $ fab --list      -- 查看可用命令
-    Available commands:
-
-        nginx_start  nginx start 
-        nginx_stop   nginx stop
-        mysql_start  mysql start
+$ cat fabfile.py
+from fabric.api import *
+env.roledefs = {'nginx': ['x.x.x.x', 'y.y.y.y'], 'mysql': 'z.z.z.z'}
+@task
+def mysql_start()
+    ''' mysql start '''
+    sudo('/etc/init.d/mysql start')
     
-    $ fab -R nginx nginx_start  -- 启动 nginx
-    $ fab -R mysql mysql_start  -- 启动 mysql
+$ fab --list      -- 查看可用命令
+Available commands:
+
+    nginx_start  nginx start 
+    nginx_stop   nginx stop
+    mysql_start  mysql start
+
+$ fab -R nginx nginx_start  -- 启动 nginx
+$ fab -R mysql mysql_start  -- 启动 mysql
+
 {% endhighlight %}
 
 示例3：混合本地和远程操作
 
 {% highlight bash %}
 
-    $ cat fabfile
-    def hello():
-        ''' test hello '''
-        with lcd('/tmp'):  # 切换到 /tmp 目录下
-            local('svn co http://xxx xxx') # check 代码到本地
-            local('tar czf xxx.tar.gz xxx/') # 压缩本地包
-            put('xxx.tar.gz', '/tmp') # 上传压缩包到远程 /tmp 目录下
-        with cd('/tmp'):   # 切换到远程 /tmp 目录
-            run('tar zxf xxx.tar.gz') # 远程解压
+$ cat fabfile
+def hello():
+    ''' test hello '''
+    with lcd('/tmp'):  # 切换到 /tmp 目录下
+        local('svn co http://xxx xxx') # check 代码到本地
+        local('tar czf xxx.tar.gz xxx/') # 压缩本地包
+        put('xxx.tar.gz', '/tmp') # 上传压缩包到远程 /tmp 目录下
+    with cd('/tmp'):   # 切换到远程 /tmp 目录
+        run('tar zxf xxx.tar.gz') # 远程解压
+
 {% endhighlight %}
 
 是不是看上去都是像本地一样？对吧。

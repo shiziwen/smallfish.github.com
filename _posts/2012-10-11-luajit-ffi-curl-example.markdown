@@ -10,47 +10,51 @@ title: LuaJIT FFI 调用 Curl 示例
 
 {% highlight bash %}
 
-    操作系统：   Mac OS X 10.8.2
-    LuaJIT版本：LuaJIT-2.0.0-beta10
-    Curl版本：  7.24.0
+操作系统：   Mac OS X 10.8.2
+LuaJIT版本：LuaJIT-2.0.0-beta10
+Curl版本：  7.24.0
+
 {% endhighlight %}
 
 测试代码如下：
 
 {% highlight bash %}
 
-    local ffi = require 'ffi'
+local ffi = require 'ffi'
 
-    ffi.cdef[[
-        void *curl_easy_init();
-        int curl_easy_setopt(void *curl, int option, ...);
-        int curl_easy_perform(void *curl);
-        void curl_easy_cleanup(void *curl);
-        char *curl_easy_strerror(int code);
-    ]]
+ffi.cdef[[
+    void *curl_easy_init();
+    int curl_easy_setopt(void *curl, int option, ...);
+    int curl_easy_perform(void *curl);
+    void curl_easy_cleanup(void *curl);
+    char *curl_easy_strerror(int code);
+]]
 
-    local libcurl = ffi.load('libcurl')
+local libcurl = ffi.load('libcurl')
 
-    local curl = libcurl.curl_easy_init()
-    local CURLOPT_URL = 10002 -- 参考 curl/curl.h 中定义
+local curl = libcurl.curl_easy_init()
+local CURLOPT_URL = 10002 -- 参考 curl/curl.h 中定义
 
-    if curl then
-        libcurl.curl_easy_setopt(curl, CURLOPT_URL, 'http://example.com')
-        res = libcurl.curl_easy_perform(curl)
-        if res ~= 0 then
-            print(ffi.string(libcurl.curl_easy_strerror(res)))
-        end
-        libcurl.curl_easy_cleanup(curl)
+if curl then
+    libcurl.curl_easy_setopt(curl, CURLOPT_URL, 'http://example.com')
+    res = libcurl.curl_easy_perform(curl)
+    if res ~= 0 then
+        print(ffi.string(libcurl.curl_easy_strerror(res)))
     end
+    libcurl.curl_easy_cleanup(curl)
+end
+
 {% endhighlight %}
 
 
 参考：[http://develcuy.com/en/playing-luajit-ffi](http://develcuy.com/en/playing-luajit-ffi)（被此文坑了一下，示例中 curl_easy_setopt 函数 option 类型为：char，正确的应该是：int）
 
 报错信息如下（可以辅助设置 VERBOSE（值为41） 选项调试）：
+
 {% highlight bash %}
 
-    URL using bad/illegal format or missing URL
+URL using bad/illegal format or missing URL
+
 {% endhighlight %}
 
 __END__

@@ -23,35 +23,35 @@ title: lua-resty-beanstalkd 模块教程
 
 {% highlight bash %}
 
-        location /t {
-            content_by_lua '
-                local beanstalkd = require "resty.beanstalkd"
-                
-                local bean, err = beanstalkd:new()
+location /t {
+    content_by_lua '
+        local beanstalkd = require "resty.beanstalkd"
+        
+        local bean, err = beanstalkd:new()
 
-                local ok, err = bean:connect("127.0.0.1", 11300)
-                if not ok then
-                    ngx.say("1: failed to connect: ", err)
-                    return
-                end
+        local ok, err = bean:connect("127.0.0.1", 11300)
+        if not ok then
+            ngx.say("1: failed to connect: ", err)
+            return
+        end
 
-                local ok, err = bean:use("default")
-                if not ok then
-                    ngx.say("2: failed to use tube: ", err)
-                    return
-                end
-           
-                local id, err = bean:put("hello")
-                if not id then
-                    ngx.say("3: failed to put: ", err)
-                    return
-                end
+        local ok, err = bean:use("default")
+        if not ok then
+            ngx.say("2: failed to use tube: ", err)
+            return
+        end
+   
+        local id, err = bean:put("hello")
+        if not id then
+            ngx.say("3: failed to put: ", err)
+            return
+        end
 
-                ngx.say("put: ", id)
+        ngx.say("put: ", id)
 
-                bean:close()
-            ';
-        }
+        bean:close()
+    ';
+}
 
 {% endhighlight %}
 
@@ -59,41 +59,41 @@ title: lua-resty-beanstalkd 模块教程
 
 {% highlight bash %}
 
-        location /t {
-            content_by_lua '
-                local beanstalkd = require "resty.beanstalkd"
+location /t {
+    content_by_lua '
+        local beanstalkd = require "resty.beanstalkd"
 
-                local bean, err = beanstalkd:new()
+        local bean, err = beanstalkd:new()
 
-                local ok, err = bean:connect("127.0.0.1", 11300)
-                if not ok then
-                    ngx.say("1: failed to connect: ", err)
-                    return
-                end
+        local ok, err = bean:connect("127.0.0.1", 11300)
+        if not ok then
+            ngx.say("1: failed to connect: ", err)
+            return
+        end
 
-                local ok, err = bean:watch("default")
-                if not ok then
-                    ngx.say("2: failed to watch: ", err)
-                    return
-                end
+        local ok, err = bean:watch("default")
+        if not ok then
+            ngx.say("2: failed to watch: ", err)
+            return
+        end
 
-                local id, data = bean:reserve()
-                if not id then
-                    ngx.say("3: failed to reserve: ", id)
-                    return
-                else
-                    ngx.say("1: reserve: ", id)
-                    local ok, err = bean:delete(id)
-                    if not ok then
-                        ngx.say("4: failed to delete: ", id)
-                        return
-                    end
-                    ngx.say("2: delete: ", id)
-                end
+        local id, data = bean:reserve()
+        if not id then
+            ngx.say("3: failed to reserve: ", id)
+            return
+        else
+            ngx.say("1: reserve: ", id)
+            local ok, err = bean:delete(id)
+            if not ok then
+                ngx.say("4: failed to delete: ", id)
+                return
+            end
+            ngx.say("2: delete: ", id)
+        end
 
-                bean:close()
-            ';
-        }
+        bean:close()
+    ';
+}
 
 {% endhighlight %}
 
