@@ -1,4 +1,3 @@
-
 ---
 layout: post
 title: RabbitMQ REST API 教程
