@@ -47,31 +47,50 @@ title: RabbitMQ REST API 教程
 
 1. 新建一个 Exchange：
 
+{% highlight bash %}
+
         $ curl -i -X POST http://127.0.0.1:8080/exchange -d \
         '{"name": "e1", "type": "topic", "durable": true, "autodelete": false}'
+
+{% endhighlight %}
     
 2. 新建一个 Queue：
+
+{% highlight bash %}
 
         $ curl -i -X POST http://127.0.0.1:8080/queue -d \
         '{"name": "q1"}'
 
+{% endhighlight %}
 
 3. 绑定 Queue 到 Exchange 上：
+
+{% highlight bash %}
 
         $ curl -i -X POST http://127.0.0.1:8080/queue/bind -d \
         '{"queue": "q1", "exchange": "e1", "keys": ["aa", "bb", "cc"]}'
 
+{% endhighlight %}
+
 4. 发布消息到 Exchange，指定 Routing-key：
+
+{% highlight bash %}
 
         $ curl -i -X POST "http://127.0.0.1:8080/publish" -d \
         '{"exchange": "e1", "key": "bb", "body": "hahaha"}'
 
+{% endhighlight %}
+
 5. 读取一下刚才发送的消息，即消费某个 Queue：
+
+{% highlight bash %}
 
         $ curl -i "http://127.0.0.1:8080/queue?name=q1"
         
         PS：消费的接口输出为 Chunked 模式，可以用类似文件的行读取方式，接口是 HTTP 长连接。
         同时这个接口也支持多个 Queue 一起消费，类似：“/queue?name=q1&name=q2” 即可。
+
+{% endhighlight %}
 
 
 基本常用的接口已经暴露出来， 后续还会封装一些其他语言的 SDK，其实都是普通的 HTTP 的请求。
