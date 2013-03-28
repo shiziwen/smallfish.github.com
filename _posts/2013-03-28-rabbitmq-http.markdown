@@ -45,7 +45,7 @@ title: RabbitMQ REST API
 
 好了，还是来一点实际的例子吧。完全是 curl 操作：
 
-1. 新建一个 Exchange：
+新建一个 Exchange：
 
 {% highlight bash %}
 
@@ -54,7 +54,7 @@ $ curl -i -X POST http://127.0.0.1:8080/exchange -d \
 
 {% endhighlight %}
     
-2. 新建一个 Queue：
+新建一个 Queue：
 
 {% highlight bash %}
 
@@ -63,7 +63,7 @@ $ curl -i -X POST http://127.0.0.1:8080/queue -d \
 
 {% endhighlight %}
 
-3. 绑定 Queue 到 Exchange 上：
+绑定 Queue 到 Exchange 上：
 
 {% highlight bash %}
 
@@ -72,7 +72,7 @@ $ curl -i -X POST http://127.0.0.1:8080/queue/bind -d \
 
 {% endhighlight %}
 
-4. 发布消息到 Exchange，指定 Routing-key：
+发布消息到 Exchange，指定 Routing-key：
 
 {% highlight bash %}
 
@@ -81,7 +81,7 @@ $ curl -i -X POST http://127.0.0.1:8080/publish -d \
 
 {% endhighlight %}
 
-5. 读取一下刚才发送的消息，即消费某个 Queue：
+读取一下刚才发送的消息，即消费某个 Queue：
 
 {% highlight bash %}
 
