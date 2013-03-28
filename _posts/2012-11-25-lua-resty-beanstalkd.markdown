@@ -1,4 +1,3 @@
-
 ---
 layout: post
 title: lua-resty-beanstalkd 模块教程

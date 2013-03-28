@@ -1,4 +1,3 @@
-
 ---
 layout: post
 title: 如何编写 Go 程序（最新版）
